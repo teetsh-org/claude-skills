@@ -8,7 +8,7 @@ Add this marketplace to Claude Code:
 
 ```bash
 # In Claude Code, add marketplace
-/marketplace add https://github.com/teetsh-org/claude-skills
+/plugin marketplace add https://github.com/teetsh-org/claude-skills
 ```
 
 Then install the plugin (skills are included):
@@ -20,6 +20,7 @@ Then install the plugin (skills are included):
 ## Available Skills
 
 ### golang-code-review
+
 Comprehensive Go code review skill for PR reviews, architecture assessment, and test quality analysis. Ensures adherence to Go best practices, security standards, and project-specific patterns.
 
 **Keywords:** go, golang, code-review, security, testing, architecture
@@ -38,6 +39,7 @@ skills/
 ## Contributing
 
 Add new skills by creating PR with:
+
 1. Create skill directory under `skills/<skill-name>/`
 2. Add `SKILL.md` with frontmatter (name, description)
 3. Include any reference materials in `references/`
