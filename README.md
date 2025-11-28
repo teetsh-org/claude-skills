@@ -1,6 +1,6 @@
 # Teetsh Skills
 
-Community-driven Claude Skills marketplace for specialized tasks.
+Teetsh's own Claude Skills marketplace for specialized tasks.
 
 ## Installation
 
