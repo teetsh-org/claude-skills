@@ -5,7 +5,9 @@
       "Bash(mv:*)",
       "Bash(rmdir:*)",
       "Bash(mkdir:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "WebFetch(domain:code.claude.com)",
+      "Bash(git mv:*)"
     ],
     "deny": [],
     "ask": []
