@@ -6,19 +6,17 @@
   },
   "metadata": {
     "description": "Community-driven Claude Skills for specialized tasks",
-    "version": "1.0.0",
-    "pluginRoot": "./skills"
+    "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "golang-code-review",
-      "source": "./golang-code-review",
-      "description": "Comprehensive Go code review skill for PR reviews, architecture assessment, and test quality analysis. Use when reviewing Go code to ensure adherence to Go best practices, security standards, and project-specific patterns.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Teetsh"
-      },
-      "keywords": ["go", "golang", "code-review", "security", "testing", "architecture"]
+      "name": "teetsh-skills",
+      "description": "Collection of Teetsh-specific skills including Go code review with project patterns",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/golang-code-review"
+      ]
     }
   ]
 }
