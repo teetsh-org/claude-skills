@@ -11,12 +11,13 @@
   "plugins": [
     {
       "name": "teetsh-skills",
-      "description": "Collection of Teetsh-specific skills including Go code review with project patterns",
       "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/golang-code-review"
-      ]
+      "description": "Collection of Teetsh-specific skills including Go code review with project patterns",
+      "version": "1.0.0",
+      "author": {
+        "name": "Teetsh"
+      },
+      "keywords": ["skills", "go", "code-review"]
     }
   ]
 }

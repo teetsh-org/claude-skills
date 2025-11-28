@@ -1,0 +1,13 @@
+{
+  "name": "teetsh-skills",
+  "version": "1.0.0",
+  "description": "Community-driven Claude Skills for specialized tasks",
+  "author": {
+    "name": "Teetsh",
+    "email": "arnaud@teetsh.com"
+  },
+  "homepage": "https://github.com/teetsh-org/claude-skills",
+  "repository": "https://github.com/teetsh-org/claude-skills",
+  "license": "MIT",
+  "keywords": ["skills", "go", "code-review"]
+}
