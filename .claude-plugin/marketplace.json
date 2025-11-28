@@ -2,7 +2,7 @@
   "name": "teetsh-skills",
   "owner": {
     "name": "Teetsh",
-    "url": "https://github.com/teetsh-org"
+    "email": "hello@teetsh.io"
   },
   "metadata": {
     "description": "Community-driven Claude Skills for specialized tasks",
@@ -15,10 +15,10 @@
       "source": "./golang-code-review",
       "description": "Comprehensive Go code review skill for PR reviews, architecture assessment, and test quality analysis. Use when reviewing Go code to ensure adherence to Go best practices, security standards, and project-specific patterns.",
       "version": "1.0.0",
-      "author": "Teetsh",
-      "category": "code-review",
-      "keywords": ["go", "golang", "code-review", "security", "testing", "architecture"],
-      "tags": ["go", "review", "security"]
+      "author": {
+        "name": "Teetsh"
+      },
+      "keywords": ["go", "golang", "code-review", "security", "testing", "architecture"]
     }
   ]
 }
