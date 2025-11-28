@@ -11,10 +11,10 @@ Add this marketplace to Claude Code:
 /marketplace add https://github.com/teetsh-org/claude-skills
 ```
 
-Then install skills:
+Then install the plugin (skills are included):
 
 ```bash
-/skills install golang-code-review
+/plugins install teetsh-skills
 ```
 
 ## Available Skills
@@ -41,4 +41,4 @@ Add new skills by creating PR with:
 1. Create skill directory under `skills/<skill-name>/`
 2. Add `SKILL.md` with frontmatter (name, description)
 3. Include any reference materials in `references/`
-4. Update `.claude-plugin/marketplace.json` to register the skill
+4. Skills are auto-discovered, no need to update marketplace.json
