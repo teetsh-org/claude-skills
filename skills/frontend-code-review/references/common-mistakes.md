@@ -5,30 +5,36 @@ Teetsh-specific antipatterns to catch during code review.
 ## API & Data Fetching
 
 ### Using Axios Directly
+
 ```tsx
 // Wrong
-import axios from 'axios';
-axios.get('/api/students');
+import axios from "axios";
+axios.get("/api/students");
 
 // Correct - use request utility (handles auth, errors, interceptors)
-import request from '@teetsh/app/src/utils/request';
-request('/api/students');
+import request from "@teetsh/app/src/utils/request";
+request("/api/students");
 ```
 
 ### Query Keys Missing School Context
+
 ```tsx
 // Wrong - cache won't be isolated per school
-queryKey: [STUDENTS_KEY, classId]
+queryKey: [STUDENTS_KEY, classId];
 
 // Correct
-queryKey: [schoolyear.id, school.id, STUDENTS_KEY, classId]
+queryKey: [schoolyear.id, school.id, STUDENTS_KEY, classId];
 ```
 
 ### Data Transformation in Components
+
 ```tsx
 // Wrong - transform in component
 const { data } = useStudents();
-const formatted = data?.map(s => ({ ...s, fullName: `${s.first} ${s.last}` }));
+const formatted = data?.map((s) => ({
+  ...s,
+  fullName: `${s.first} ${s.last}`,
+}));
 
 // Correct - transform in serializer or select
 export function useStudents({ select }) {
@@ -41,6 +47,7 @@ export function useStudents({ select }) {
 ## Styling
 
 ### className Instead of tw
+
 ```tsx
 // Wrong
 <div className="flex items-center gap-2">
@@ -50,6 +57,7 @@ export function useStudents({ select }) {
 ```
 
 ### Hardcoded Colors
+
 ```tsx
 // Wrong
 tw`text-[#2E43BD]`
@@ -61,6 +69,7 @@ tw`text-danger-intense`
 ```
 
 ### Input Without FormGroup
+
 ```tsx
 // Wrong
 <Input value={email} onChange={setEmail} />
@@ -71,22 +80,10 @@ tw`text-danger-intense`
 </FormGroup>
 ```
 
-### Missing hasError on Input
-```tsx
-// Wrong - error shows but input not styled
-<FormGroup error={error}>
-  <Input value={value} />
-</FormGroup>
-
-// Correct
-<FormGroup error={error}>
-  <Input value={value} hasError={!!error} />
-</FormGroup>
-```
-
 ## i18n
 
 ### Hardcoded User-Facing Strings
+
 ```tsx
 // Wrong
 <Button>Save</Button>
@@ -98,28 +95,31 @@ tw`text-danger-intense`
 ```
 
 ### Missing Namespace in useTranslation
+
 ```tsx
 // Wrong
 const { t } = useTranslation();
-t('buttons.save')
+t("buttons.save");
 
 // Correct
-const { t } = useTranslation(['common']);
-t('common:buttons.save')
+const { t } = useTranslation(["common"]);
+t("common:buttons.save");
 ```
 
 ### Using date-fns Directly
+
 ```tsx
 // Wrong
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 // Correct
-import { format } from '@teetsh/app/src/utils/time/format';
+import { format } from "@teetsh/app/src/utils/time/format";
 ```
 
 ## TypeScript
 
 ### Unnecessary `any` Types
+
 ```tsx
 // Wrong
 const handleClick = (e: any) => { ... }
@@ -131,6 +131,7 @@ const data: StudentResponse = response.data;
 ```
 
 ### Missing Props Interface
+
 ```tsx
 // Wrong
 export default function Card({ title, children }) { ... }
@@ -146,6 +147,7 @@ export default function Card({ title, children }: Props) { ... }
 ## React Patterns
 
 ### Missing Loading State
+
 ```tsx
 // Wrong
 const { data } = useStudents();
@@ -158,6 +160,7 @@ return <StudentList students={data} />;
 ```
 
 ### Missing Error State
+
 ```tsx
 // Wrong
 const { data, isLoading } = useStudents();
@@ -168,6 +171,7 @@ if (error) return <ErrorPage />;
 ```
 
 ### Context Hook Without Validation
+
 ```tsx
 // Wrong
 export function useUser() {
@@ -178,42 +182,16 @@ export function useUser() {
 export function useUser() {
   const context = useContext(UserContext);
   if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
 }
 ```
 
-### Prop Drilling Through Many Levels
-```tsx
-// Wrong - drilling through 3+ components
-<Parent data={data}>
-  <Child data={data}>
-    <GrandChild data={data} />
-
-// Correct - use context
-<DataProvider value={data}>
-  <Parent>
-    <Child>
-      <GrandChild /> {/* uses useData() */}
-```
-
 ## Accessibility
 
-### Missing aria-label on Icon Buttons
-```tsx
-// Wrong
-<button onClick={onDelete}>
-  <TrashIcon />
-</button>
-
-// Correct
-<button onClick={onDelete} aria-label={t('common:buttons.delete')}>
-  <TrashIcon aria-hidden="true" />
-</button>
-```
-
 ### Missing htmlFor on Labels
+
 ```tsx
 // Wrong
 <label>Email</label>
@@ -227,6 +205,7 @@ export function useUser() {
 ```
 
 ### Non-Semantic Elements for Interactive Content
+
 ```tsx
 // Wrong
 <div onClick={handleClick}>Click me</div>
@@ -238,17 +217,19 @@ export function useUser() {
 ## Testing
 
 ### Vague Test Names
+
 ```tsx
 // Wrong
-it('works')
-it('test formatDate')
+it("works");
+it("test formatDate");
 
 // Correct
-it('should format date in French locale')
-it('should return empty string for null date')
+it("should format date in French locale");
+it("should return empty string for null date");
 ```
 
 ### Missing Edge Case Tests
+
 ```tsx
 // Wrong - only happy path
 it('should return students', () => { ... });
@@ -260,6 +241,7 @@ it('should throw error when unauthorized', () => { ... });
 ```
 
 ### Missing Storybook Stories
+
 ```tsx
 // Every component in /components/ should have .stories.tsx
 // Check: Does this new component have stories?
@@ -268,16 +250,18 @@ it('should throw error when unauthorized', () => { ... });
 ## Performance
 
 ### Missing useCallback for Event Handlers Passed to Children
+
 ```tsx
 // Wrong - creates new function every render
-<ChildComponent onClick={() => handleClick(id)} />
+<ChildComponent onClick={() => handleClick(id)} />;
 
 // Correct
 const handleChildClick = useCallback(() => handleClick(id), [id]);
-<ChildComponent onClick={handleChildClick} />
+<ChildComponent onClick={handleChildClick} />;
 ```
 
 ### Missing useMemo for Expensive Computations
+
 ```tsx
 // Wrong - recalculates every render
 const sortedStudents = students.sort((a, b) => a.name.localeCompare(b.name));

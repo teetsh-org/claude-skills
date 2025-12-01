@@ -17,8 +17,10 @@ Tests are co-located with source files:
 ```
 Component/
 ├── index.tsx
-├── index.browser.test.tsx  # Browser tests for component
-└── index.stories.tsx       # Storybook stories
+├── index.browser.test.tsx     # Browser tests for component
+├── index.stories.tsx          # Storybook stories
+├── useComponentState.ts       # Component-specific hook
+└── useComponentState.test.tsx # jsdom unit test for hook
 
 utils/
 ├── formatDate.ts
@@ -199,39 +201,6 @@ test.describe("Authentication", () => {
 - Use `data-testid` attributes for stable selectors
 - Test both success and error paths
 - Keep tests independent (no shared state)
-
-## Mocking
-
-### Mocking API Calls
-
-```tsx
-import { vi } from "vitest";
-import request from "@teetsh/app/src/utils/request";
-
-vi.mock("@teetsh/app/src/utils/request");
-
-describe("useStudents", () => {
-  it("should fetch students", async () => {
-    vi.mocked(request).mockResolvedValue({
-      data: [{ id: "1", name: "Student 1" }],
-    });
-
-    // ... test implementation
-  });
-});
-```
-
-### Mocking Hooks
-
-```tsx
-vi.mock("@teetsh/app/src/hooks/useUser", () => ({
-  useUser: () => ({
-    id: "user-1",
-    name: "Test User",
-    location: "Europe/Paris",
-  }),
-}));
-```
 
 ## Common Mistakes
 

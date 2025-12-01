@@ -12,7 +12,8 @@ const { schoolyear, school } = useSchoolSchoolyear();
 
 useQuery({
   queryKey: [schoolyear.id, school.id, STUDENTS_KEY, classId],
-  queryFn: () => getStudents({ schoolyearId: schoolyear.id, schoolId: school.id, classId }),
+  queryFn: () =>
+    getStudents({ schoolyearId: schoolyear.id, schoolId: school.id, classId }),
 });
 
 // Wrong - missing school context
@@ -23,9 +24,10 @@ useQuery({
 ```
 
 Key constants are defined at the top of query files:
+
 ```tsx
-const STUDENTS_KEY = 'students';
-const APPELS_KEY = 'appels';
+const STUDENTS_KEY = "students";
+const APPELS_KEY = "appels";
 ```
 
 ## Query Hook Structure
@@ -45,15 +47,16 @@ export function useAppels<T = Appel | undefined>(props: Props) {
   const { schoolyear, school } = useSchoolSchoolyear();
 
   return useQuery<DayAppels, AxiosError, T>({
-    queryKey: [schoolyear.id, school.id, APPELS_KEY, format(date, 'fr-FR')],
-    queryFn: () => getAppelsBetweenDates({
-      schoolyearId: schoolyear.id,
-      schoolId: school.id,
-      startDate: date,
-      endDate: date,
-      tz: user.location,
-    }),
-    select: select || (data => data[props.type]),
+    queryKey: [schoolyear.id, school.id, APPELS_KEY, format(date, "fr-FR")],
+    queryFn: () =>
+      getAppelsBetweenDates({
+        schoolyearId: schoolyear.id,
+        schoolId: school.id,
+        startDate: date,
+        endDate: date,
+        tz: user.location,
+      }),
+    select: select || ((data) => data[props.type]),
     staleTime: 1000 * 60 * 60, // 1 hour
     refetchOnWindowFocus: false,
   });
@@ -119,7 +122,7 @@ export function useUpdateStudent() {
   return useMutation({
     mutationFn: (data: UpdateStudentInput) =>
       request(`/students/${data.id}`, {
-        method: 'PATCH',
+        method: "PATCH",
         data: serializeStudent(data),
       }),
     onSuccess: () => {
@@ -161,19 +164,21 @@ useMutation({
 ## Common Mistakes
 
 ### Missing Context in Query Keys
+
 ```tsx
 // Wrong
-queryKey: [STUDENTS_KEY]
+queryKey: [STUDENTS_KEY];
 
 // Correct
-queryKey: [schoolyear.id, school.id, STUDENTS_KEY]
+queryKey: [schoolyear.id, school.id, STUDENTS_KEY];
 ```
 
 ### Transformation in Component
+
 ```tsx
 // Wrong - transforming in component
 const { data } = useStudents();
-const formattedStudents = data?.map(s => ({
+const formattedStudents = data?.map((s) => ({
   ...s,
   fullName: `${s.firstName} ${s.lastName}`,
 }));
@@ -185,17 +190,19 @@ const { data } = useStudents({
 ```
 
 ### Not Using Request Utility
+
 ```tsx
 // Wrong - using axios directly
-import axios from 'axios';
-axios.get('/students');
+import axios from "axios";
+axios.get("/students");
 
 // Correct - use request utility
-import request from '@teetsh/app/src/utils/request';
-request('/students');
+import request from "@teetsh/app/src/utils/request";
+request("/students");
 ```
 
 ### Forgetting Error State
+
 ```tsx
 // Wrong
 const { data, isLoading } = useStudents();

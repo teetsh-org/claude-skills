@@ -46,79 +46,28 @@ tw`text-[#2E43BD]`
 ```
 
 Available color categories:
+
 - `brand-*`: Brand colors (intense, moderate, subtle)
 - `neutral-*`: Gray scale (intense, moderate, quiet, subtle)
 - `danger-*`: Error/danger states
 - `success-*`: Success states
 - `warning-*`: Warning states
 
-## Styled Components
-
-When creating styled components with dynamic props:
-
-```tsx
-import tw from 'twin.macro';
-import styled from '@emotion/styled';
-
-const Wrapper = styled.div(
-  ({ hasLabel, shouldFill }: { hasLabel?: boolean; shouldFill?: boolean }) => [
-    tw`relative`,
-    hasLabel && tw`mt-1`,
-    shouldFill && tw`w-full`,
-  ],
-);
-```
-
-## FormGroup Pattern
-
-ALL form inputs MUST be wrapped with FormGroup:
-
-```tsx
-// Correct
-<FormGroup
-  id="email"
-  label={t('common:form.email')}
-  labelInfo={t('common:form.optional')}
-  error={errors.email}
-  helperText={t('common:form.emailHelper')}
-  fill
->
-  <Input
-    id="email"
-    value={formData.email}
-    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-    hasError={!!errors.email}
-  />
-</FormGroup>
-
-// Wrong - input without FormGroup
-<Input
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-/>
-```
-
-FormGroup provides:
-- Consistent label styling
-- Error message display
-- Helper text
-- Accessibility (label-input linking)
-
 ## Input Component Props
 
 ```tsx
 <Input
-  id="email"              // Required for accessibility
+  id="email" // Required for accessibility
   value={value}
   onChange={onChange}
-  hasError={!!error}      // Triggers error styling
-  small                   // Size variant
-  large                   // Size variant
-  extraLarge              // Size variant
-  icon={<SearchIcon />}   // Left icon
+  hasError={!!error} // Triggers error styling
+  small // Size variant
+  large // Size variant
+  extraLarge // Size variant
+  icon={<SearchIcon />} // Left icon
   rightElement={<Button />} // Right element
-  selectAllOnFocus        // Select text on focus
-  autoComplete="off"      // Autocomplete control
+  selectAllOnFocus // Select text on focus
+  autoComplete="off" // Autocomplete control
 />
 ```
 
@@ -138,10 +87,10 @@ FormGroup provides:
 
 ```tsx
 // Only when mobile and desktop need entirely different components
-const isMobile = useIsBelowBreakpoint('lg');
+const isMobile = useIsBelowBreakpoint("lg");
 
 if (isMobile) {
-  return <MobileDashboard />;  // Completely different layout
+  return <MobileDashboard />; // Completely different layout
 }
 return <DesktopDashboard />;
 ```
@@ -158,6 +107,7 @@ For printable content:
 ## Common Size Classes
 
 Standard spacing and sizing:
+
 - Buttons: `button-ms`, `button-l` (custom utilities)
 - Text: `text-sm`, `text-base`, `text-lg`
 - Spacing: `gap-2`, `gap-4`, `p-4`, `px-6`
@@ -167,18 +117,19 @@ Standard spacing and sizing:
 Use HeroIcons from the design system:
 
 ```tsx
-import { XMarkIcon, PlusIcon } from '@heroicons/react/24/outline';
-import { CheckIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { CheckIcon } from "@heroicons/react/24/solid";
 
 <Button>
   <PlusIcon tw="w-5 h-5 mr-2" />
-  {t('common:buttons.add')}
-</Button>
+  {t("common:buttons.add")}
+</Button>;
 ```
 
 ## Common Mistakes
 
 ### Hardcoded Colors
+
 ```tsx
 // Wrong
 tw`text-[#2E43BD]`
@@ -190,6 +141,7 @@ tw`text-danger-intense`
 ```
 
 ### className Instead of tw
+
 ```tsx
 // Wrong
 <div className="flex items-center">
@@ -199,6 +151,7 @@ tw`text-danger-intense`
 ```
 
 ### Missing FormGroup
+
 ```tsx
 // Wrong
 <label>Email</label>
@@ -212,6 +165,7 @@ tw`text-danger-intense`
 ```
 
 ### Inconsistent Responsive Patterns
+
 ```tsx
 // Wrong - mixing approaches
 <div className="hidden md:block">
@@ -223,6 +177,7 @@ tw`text-danger-intense`
 ```
 
 ### Missing Error Styling on Inputs
+
 ```tsx
 // Wrong - error state not reflected
 <FormGroup error={error}>

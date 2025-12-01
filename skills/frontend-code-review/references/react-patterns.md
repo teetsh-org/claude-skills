@@ -5,12 +5,14 @@ Teetsh-specific React patterns and conventions.
 ## Container vs Component Separation
 
 **Containers** (in `/containers/`) handle:
+
 - Business logic and state management
 - Data fetching via React Query hooks
 - Routing and navigation
 - Responsive branching (mobile vs desktop)
 
 **Components** (in `/components/`) are:
+
 - Presentational and reusable
 - Receive data via props
 - Handle local UI state only
@@ -19,7 +21,7 @@ Teetsh-specific React patterns and conventions.
 // Container - handles logic
 export default function StudentsContainer() {
   const { data, isLoading } = useStudents();
-  const isMobile = useIsBelowBreakpoint('lg');
+  const isMobile = useIsBelowBreakpoint("lg");
 
   if (isMobile) return <StudentsMobile students={data} />;
   return <StudentsDesktop students={data} />;
@@ -56,7 +58,7 @@ Disclosure.Panel = DisclosurePanel;
 <Disclosure>
   <Disclosure.Button>Toggle</Disclosure.Button>
   <Disclosure.Panel>Content</Disclosure.Panel>
-</Disclosure>
+</Disclosure>;
 ```
 
 ## Context Hooks with Validation
@@ -68,7 +70,7 @@ Context hooks must validate the context exists:
 export function useUser() {
   const context = useContext(UserContext);
   if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider');
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
 }
@@ -80,6 +82,7 @@ export function useUser() {
 ```
 
 Common context hooks:
+
 - `useUser()` - Current user data
 - `useSchoolSchoolyear()` - Current school and schoolyear context
 
@@ -113,18 +116,19 @@ export function scrollConfig() { ... }
 ```tsx
 // Only when mobile and desktop are fundamentally different components
 export default function Dashboard() {
-  const isMobile = useIsBelowBreakpoint('lg');
+  const isMobile = useIsBelowBreakpoint("lg");
 
   if (isMobile) {
-    return <MobileDashboard />;  // Entirely different component
+    return <MobileDashboard />; // Entirely different component
   }
   return <DesktopDashboard />;
 }
 ```
 
 For viewport height considerations:
+
 ```tsx
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 const isSmallHeight = useMediaQuery({ maxHeight: 700 });
 ```
 
@@ -173,35 +177,15 @@ export function SchoolProvider({ children }: Props) {
   if (error) return <ErrorPage />;
 
   return (
-    <SchoolContext.Provider value={data}>
-      {children}
-    </SchoolContext.Provider>
+    <SchoolContext.Provider value={data}>{children}</SchoolContext.Provider>
   );
 }
 ```
 
 ## Common Mistakes
 
-### Prop Drilling
-```tsx
-// Wrong - passing props through 3+ levels
-<Parent data={data}>
-  <Child data={data}>
-    <GrandChild data={data} />
-  </Child>
-</Parent>
-
-// Correct - use context for shared state
-<DataContext.Provider value={data}>
-  <Parent>
-    <Child>
-      <GrandChild />
-    </Child>
-  </Parent>
-</DataContext.Provider>
-```
-
 ### Missing Loading States
+
 ```tsx
 // Wrong - no loading handling
 const { data } = useStudents();
@@ -214,9 +198,15 @@ return <StudentList students={data} />;
 ```
 
 ### Side Effects in JSX
+
 ```tsx
 // Wrong - side effect in render
-return <div>{console.log(data)}{data.name}</div>;
+return (
+  <div>
+    {console.log(data)}
+    {data.name}
+  </div>
+);
 
 // Correct - side effects in useEffect
 useEffect(() => {
