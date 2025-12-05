@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "teetsh-skills",
-      "source": "./",
+      "source": "./plugins/teetsh-skills",
       "description": "Collection of Teetsh-specific skills including Go code review with project patterns",
       "version": "1.0.0",
       "author": {
