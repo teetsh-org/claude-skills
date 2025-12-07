@@ -1,7 +1,7 @@
 {
   "name": "teetsh-skills",
-  "version": "1.0.0",
-  "description": "Community-driven Claude Skills for specialized tasks",
+  "version": "1.1.0",
+  "description": "Teetsh specialised skills and commands",
   "author": {
     "name": "Teetsh",
     "email": "arnaud@teetsh.com"
