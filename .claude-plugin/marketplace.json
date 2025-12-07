@@ -1,23 +1,18 @@
 {
-  "name": "teetsh-skills",
+  "name": "teetsh-claude",
   "owner": {
     "name": "Teetsh",
     "email": "arnaud@teetsh.com"
   },
   "metadata": {
-    "description": "Community-driven Claude Skills for specialized tasks",
-    "version": "1.1.0"
+    "description": "Teetsh owned collection of plugins",
+    "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "teetsh-skills",
-      "source": "./plugins/teetsh-skills",
-      "description": "Collection of Teetsh-specific skills including Go code review with project patterns",
-      "version": "1.1.0",
-      "author": {
-        "name": "Teetsh"
-      },
-      "keywords": ["skills", "go", "code-review"]
+      "name": "code-review",
+      "source": "./code-review",
+      "description": "Bespoke Teetsh Code review command & skills"
     }
   ]
 }

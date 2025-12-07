@@ -29,12 +29,12 @@ Review the current branch's changes compared to the base branch (main/master).
 
 4. Read the reference documentation to understand Teetsh patterns:
 
-   - `skills/frontend-code-review/references/common-mistakes.md` - Common antipatterns to catch
-   - `skills/frontend-code-review/references/react-patterns.md` - Component and hook patterns
-   - `skills/frontend-code-review/references/react-query.md` - Data fetching patterns
-   - `skills/frontend-code-review/references/styling.md` - twin.macro and styling conventions
-   - `skills/frontend-code-review/references/i18n.md` - Internationalization requirements
-   - `skills/frontend-code-review/references/testing.md` - Testing standards
+   - `../../review-skills/skills/frontend-code-review/references/common-mistakes.md` - Common antipatterns to catch
+   - `../../review-skills/skills/frontend-code-review/references/react-patterns.md` - Component and hook patterns
+   - `../../review-skills/skills/frontend-code-review/references/react-query.md` - Data fetching patterns
+   - `../../review-skills/skills/frontend-code-review/references/styling.md` - twin.macro and styling conventions
+   - `../../review-skills/skills/frontend-code-review/references/i18n.md` - Internationalization requirements
+   - `../../review-skills/skills/frontend-code-review/references/testing.md` - Testing standards
 
 5. For each changed file, review against the patterns. Focus on:
    - React component patterns (container vs component, compound components)
